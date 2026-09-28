@@ -1,10 +1,3 @@
-/*
- * Google Apps Script endpoint goes here after deploying the Apps Script.
- * Example:
- * const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/XXXXXXXX/exec";
- */
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyTa0-AeSyVMlk8YWZ1yhdJ-dxhlQy0D5xMnTDezEhCtI7BwclTv_osjKZRnQ8T9pM/exec";
-
 const invitationView = document.getElementById("invitation");
 const rsvpView = document.getElementById("rsvp");
 const openRsvpButton = document.getElementById("open-rsvp");
@@ -17,14 +10,23 @@ const successMessage = document.getElementById("success-message");
 function showRsvp() {
   invitationView.hidden = true;
   rsvpView.hidden = false;
-  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
   document.getElementById("guest-name").focus();
 }
 
 function showInvitation() {
   rsvpView.hidden = true;
   invitationView.hidden = false;
-  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 }
 
 function showStatus(message) {
@@ -35,21 +37,18 @@ openRsvpButton.addEventListener("click", showRsvp);
 backButton.addEventListener("click", showInvitation);
 returnHomeButton.addEventListener("click", showInvitation);
 
-form.addEventListener("submit", (event) => {
-  const formData = new FormData(form);
+/*
+ * IMPORTANTE:
+ *
+ * NO interceptamos el submit.
+ *
+ * El navegador hará directamente el POST
+ * nativo hacia Google Apps Script.
+ */
+form.addEventListener("submit", () => {
+  const submittedAt = document.getElementById("submitted-at");
 
-  const name = String(formData.get("name") || "").trim();
-  const attendance = String(formData.get("attendance") || "");
-
-  if (!name || !attendance) {
-    event.preventDefault();
-
-    showStatus(
-      "Por favor completa los datos para continuar."
-    );
-
-    return;
-  }
+  submittedAt.value = new Date().toISOString();
 
   const submitButton = form.querySelector(
     "button[type='submit']"
@@ -60,21 +59,13 @@ form.addEventListener("submit", (event) => {
 
   showStatus("Registrando tu respuesta...");
 
-  document.getElementById("submitted-at").value =
-    new Date().toISOString();
-
   /*
-   * NO usamos preventDefault().
+   * No usamos:
+   * - event.preventDefault()
+   * - fetch()
+   * - sendBeacon()
+   * - iframe
    *
-   * El navegador hará el POST nativo hacia el iframe.
+   * El POST nativo continúa.
    */
-
-  setTimeout(() => {
-    completeRegistration();
-  }, 700);
 });
-
-function completeRegistration() {
-  form.hidden = true;
-  successMessage.hidden = false;
-}
