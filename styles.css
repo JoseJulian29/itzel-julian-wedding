@@ -1,0 +1,579 @@
+/* =========================================================
+   ITZEL & JULIAN — Wedding Invitation
+   Visual direction based on the supplied invitation image.
+   ========================================================= */
+
+:root {
+  --paper: #faf7f2;
+  --ink: #171614;
+  --muted: #77716a;
+  --line: #252321;
+  --soft-line: #d9d3cc;
+  --button: #1c1a18;
+  --white: #fffdfa;
+  --content-width: 1136px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--paper);
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Bodoni Moda", Georgia, serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.invitation-shell {
+  min-height: 100vh;
+}
+
+.view {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.paper {
+  width: min(100%, var(--content-width));
+  min-height: 100vh;
+  padding: clamp(54px, 7vw, 108px) clamp(24px, 8vw, 96px) 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* ---------- Main invitation ---------- */
+
+.month h1 {
+  margin: 0;
+  font-size: clamp(30px, 4.1vw, 43px);
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: 0.48em;
+  padding-left: 0.48em;
+}
+
+.calendar {
+  width: min(100%, 760px);
+  margin-top: clamp(58px, 6.2vw, 78px);
+}
+
+.weekdays,
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  align-items: center;
+}
+
+.weekdays {
+  font-size: clamp(17px, 2vw, 25px);
+  font-style: italic;
+  line-height: 1;
+}
+
+.weekdays span {
+  white-space: nowrap;
+}
+
+.calendar-days {
+  margin-top: 35px;
+  font-size: clamp(25px, 3vw, 34px);
+  line-height: 1;
+}
+
+.calendar-days > span {
+  height: 88px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.day-selected {
+  position: relative;
+}
+
+.day-number {
+  position: relative;
+  z-index: 2;
+}
+
+.heart-outline {
+  position: absolute;
+  z-index: 1;
+  width: 120px;
+  height: 100px;
+  top: -7px;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: visible;
+  pointer-events: none;
+}
+
+.heart-outline path {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 0.1 6.1;
+}
+
+.day-selected::after {
+  content: none;
+}
+
+.calendar-connector {
+  height: clamp(168px, 18vw, 210px);
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.connector-line {
+  display: block;
+  height: 100%;
+  border-left: 2px dotted var(--line);
+}
+
+.save-date {
+  margin-top: 2px;
+  text-align: center;
+}
+
+.save-date p {
+  margin: 0;
+  font-family: "Allura", "Brush Script MT", cursive;
+  font-size: clamp(66px, 9vw, 104px);
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: -0.025em;
+}
+
+.wedding-copy {
+  margin-top: clamp(70px, 8vw, 88px);
+  width: 100%;
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: clamp(16px, 1.8vw, 22px);
+  letter-spacing: 0.31em;
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+.wedding-copy h2 {
+  margin: 65px 0 0;
+  font-size: clamp(35px, 4.4vw, 54px);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  padding-left: 0.18em;
+  line-height: 1;
+}
+
+.wedding-copy h2 span {
+  letter-spacing: 0.05em;
+}
+
+.date {
+  margin: 74px 0 0;
+  font-size: clamp(17px, 2vw, 23px);
+  letter-spacing: 0.31em;
+  padding-left: 0.31em;
+  line-height: 1.25;
+}
+
+.location {
+  margin: clamp(185px, 20vw, 240px) 0 0;
+  font-size: clamp(16px, 1.8vw, 22px);
+  letter-spacing: 0.34em;
+  padding-left: 0.34em;
+  line-height: 1.25;
+}
+
+.primary-button {
+  margin-top: 58px;
+  border: 1px solid var(--button);
+  border-radius: 0;
+  padding: 17px 29px 16px;
+  min-width: 250px;
+  background: var(--button);
+  color: var(--white);
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    color 180ms ease;
+}
+
+.primary-button:hover {
+  transform: translateY(-2px);
+  background: transparent;
+  color: var(--button);
+}
+
+.primary-button:focus-visible,
+.back-button:focus-visible,
+.text-button:focus-visible,
+input:focus-visible,
+.radio-card:has(input:focus-visible) {
+  outline: 2px solid #77716a;
+  outline-offset: 4px;
+}
+
+/* ---------- RSVP view ---------- */
+
+.view--rsvp {
+  align-items: center;
+}
+
+.paper--rsvp {
+  justify-content: center;
+  position: relative;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.back-button {
+  position: absolute;
+  top: 42px;
+  left: clamp(24px, 8vw, 96px);
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  padding: 8px 0;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.rsvp-heading {
+  width: min(100%, 560px);
+  text-align: center;
+}
+
+.rsvp-heading h2 {
+  margin: 34px 0 0;
+  font-size: clamp(34px, 5vw, 54px);
+  font-weight: 400;
+  line-height: 1.08;
+}
+
+.rsvp-intro {
+  margin: 24px auto 0;
+  max-width: 420px;
+  color: var(--muted);
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.rsvp-form {
+  width: min(100%, 500px);
+  margin-top: 52px;
+}
+
+.field label,
+.attendance legend {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+}
+
+.field input {
+  width: 100%;
+  height: 54px;
+  border: 1px solid var(--soft-line);
+  border-radius: 0;
+  background: rgba(255, 253, 250, 0.5);
+  padding: 0 17px;
+  color: var(--ink);
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 13px;
+  outline: none;
+}
+
+.field input::placeholder {
+  color: #aaa39b;
+}
+
+.field input:focus {
+  border-color: var(--ink);
+}
+
+.attendance {
+  border: 0;
+  margin: 34px 0 0;
+  padding: 0;
+}
+
+.radio-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  min-height: 70px;
+  border: 1px solid var(--soft-line);
+  margin-top: 10px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: border-color 180ms ease, background 180ms ease;
+}
+
+.radio-card:hover {
+  border-color: #aaa39b;
+}
+
+.radio-card input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.radio-mark {
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #6e6963;
+  border-radius: 50%;
+  position: relative;
+}
+
+.radio-card input:checked + .radio-mark::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ink);
+  left: 4px;
+  top: 4px;
+}
+
+.radio-card input:checked ~ span:last-child {
+  color: var(--ink);
+}
+
+.radio-card strong,
+.radio-card small {
+  display: block;
+}
+
+.radio-card strong {
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.radio-card small {
+  margin-top: 5px;
+  color: var(--muted);
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 11px;
+}
+
+.primary-button--form {
+  width: 100%;
+  margin-top: 28px;
+}
+
+.form-status {
+  min-height: 20px;
+  margin: 17px 0 0;
+  text-align: center;
+  color: #8a5147;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 11px;
+}
+
+.success-message {
+  width: min(100%, 500px);
+  margin-top: 52px;
+  text-align: center;
+}
+
+.success-heart {
+  font-size: 55px;
+  line-height: 1;
+  margin-bottom: 30px;
+}
+
+.success-message h3 {
+  margin: 28px 0 0;
+  font-size: clamp(30px, 4vw, 44px);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.success-message > p:not(.eyebrow) {
+  margin: 20px 0 0;
+  color: var(--muted);
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 13px;
+}
+
+.text-button {
+  margin-top: 34px;
+  border: 0;
+  border-bottom: 1px solid var(--ink);
+  background: transparent;
+  padding: 0 0 5px;
+  color: var(--ink);
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+/* ---------- Small screens ---------- */
+
+@media (max-width: 640px) {
+  .paper {
+    padding-top: 48px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 56px;
+  }
+
+  .month h1 {
+    font-size: 30px;
+  }
+
+  .calendar {
+    margin-top: 53px;
+  }
+
+  .weekdays {
+    font-size: 14px;
+  }
+
+  .calendar-days {
+    margin-top: 26px;
+    font-size: 23px;
+  }
+
+  .calendar-days > span {
+    height: 72px;
+  }
+
+  .heart-outline {
+    width: 104px;
+    height: 87px;
+    top: -5px;
+  }
+
+  .heart-outline path {
+    stroke-width: 2.3;
+    stroke-dasharray: 0.1 5.8;
+  }
+
+  .calendar-connector {
+    height: 145px;
+  }
+
+  .save-date p {
+    font-size: 67px;
+  }
+
+  .wedding-copy {
+    margin-top: 63px;
+  }
+
+  .eyebrow {
+    font-size: 14px;
+    letter-spacing: 0.23em;
+  }
+
+  .wedding-copy h2 {
+    margin-top: 46px;
+    font-size: 32px;
+    letter-spacing: 0.12em;
+    padding-left: 0.12em;
+  }
+
+  .date {
+    margin-top: 49px;
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    padding-left: 0.2em;
+  }
+
+  .location {
+    margin-top: 150px;
+    font-size: 14px;
+    letter-spacing: 0.23em;
+    padding-left: 0.23em;
+  }
+
+  .primary-button {
+    width: min(100%, 320px);
+    margin-top: 45px;
+  }
+
+  .back-button {
+    top: 25px;
+    left: 20px;
+  }
+
+  .paper--rsvp {
+    justify-content: flex-start;
+    padding-top: 104px;
+  }
+
+  .rsvp-heading h2 {
+    margin-top: 25px;
+  }
+
+  .rsvp-form {
+    margin-top: 42px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .primary-button,
+  .radio-card {
+    transition: none;
+  }
+}

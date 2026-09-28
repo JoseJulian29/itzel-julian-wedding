@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#faf7f2">
+  <title>Itzel & Julian — 06 de marzo de 2027</title>
+  <meta name="description" content="Invitación de boda de Itzel y Julian. 06 de marzo de 2027, Manzanillo, Colima.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <main class="invitation-shell">
+    <!-- =========================
+         INVITACIÓN
+         ========================= -->
+    <section id="invitation" class="view view--invitation" aria-labelledby="wedding-title">
+      <div class="paper">
+        <header class="month">
+          <h1>MARZO</h1>
+        </header>
+
+        <section class="calendar" aria-label="Calendario de marzo de 2027">
+          <div class="weekdays" aria-hidden="true">
+            <span>Mie</span>
+            <span>Jue</span>
+            <span>Vie</span>
+            <span class="is-selected">Sabado</span>
+            <span>Dom</span>
+            <span>Lun</span>
+            <span>Mar</span>
+          </div>
+
+          <div class="calendar-days">
+            <span>3</span>
+            <span>4</span>
+            <span>5</span>
+            <span class="day-selected" aria-label="Sábado 6 de marzo">
+              <svg class="heart-outline" viewBox="0 0 120 100" aria-hidden="true" focusable="false">
+                <path d="M60 91 C52 82 13 57 13 31 C13 13 35 6 49 18 L60 29 L71 18 C85 6 107 13 107 31 C107 57 68 82 60 91 Z"></path>
+              </svg>
+              <span class="day-number">6</span>
+            </span>
+            <span>7</span>
+            <span>8</span>
+            <span>9</span>
+          </div>
+        </section>
+
+        <div class="calendar-connector" aria-hidden="true">
+          <span class="connector-line"></span>
+        </div>
+
+        <section class="save-date">
+          <p>save the date</p>
+        </section>
+
+        <section class="wedding-copy">
+          <p class="eyebrow">PARA LA BODA DE</p>
+          <h2 id="wedding-title">ITZEL <span>&amp;</span> JULIAN</h2>
+          <p class="date">SABADO, 06 DE MARZO 2027</p>
+          <p class="location">MANZANILLO, COLIMA</p>
+        </section>
+
+        <button class="primary-button" id="open-rsvp" type="button">
+          CONFIRMAR ASISTENCIA
+        </button>
+      </div>
+    </section>
+
+    <!-- =========================
+         RSVP
+         ========================= -->
+    <section id="rsvp" class="view view--rsvp" aria-labelledby="rsvp-title" hidden>
+      <div class="paper paper--rsvp">
+        <button class="back-button" id="back-to-invitation" type="button" aria-label="Regresar a la invitación">
+          <span aria-hidden="true">←</span> Volver
+        </button>
+
+        <div class="rsvp-heading">
+          <p class="eyebrow">ITZEL &amp; JULIAN</p>
+          <h2 id="rsvp-title">Confirma tu asistencia</h2>
+          <p class="rsvp-intro">
+            Nos encantará compartir este día contigo.
+          </p>
+        </div>
+
+        <!-- Iframe invisible que recibe la respuesta de Google Apps Script -->
+        <iframe
+          name="rsvp-frame"
+          id="rsvp-frame"
+          hidden
+          title="Procesando confirmación"
+        ></iframe>
+
+        <form
+          id="rsvp-form"
+          class="rsvp-form"
+          action="https://script.google.com/macros/s/AKfycbyTa0-AeSyVMlk8YWZ1yhdJ-dxhlQy0D5xMnTDezEhCtI7BwclTv_osjKZRnQ8T9pM/exec"
+          method="POST"
+          target="rsvp-frame"
+        >
+          <div class="field">
+            <label for="guest-name">Tu nombre</label>
+
+            <input
+              id="guest-name"
+              name="name"
+              type="text"
+              autocomplete="name"
+              placeholder="Nombre y apellido"
+              required
+              maxlength="120"
+            >
+          </div>
+
+
+          <fieldset class="attendance">
+            <legend>¿Nos acompañarás?</legend>
+
+            <label class="radio-card">
+              <input
+                type="radio"
+                name="attendance"
+                value="Sí"
+                required
+              >
+
+              <span
+                class="radio-mark"
+                aria-hidden="true"
+              ></span>
+
+              <span>
+                <strong>Sí, ahí estaré</strong>
+                <small>Quiero acompañarlos</small>
+              </span>
+            </label>
+
+
+            <label class="radio-card">
+              <input
+                type="radio"
+                name="attendance"
+                value="No"
+                required
+              >
+
+              <span
+                class="radio-mark"
+                aria-hidden="true"
+              ></span>
+
+              <span>
+                <strong>No podré asistir</strong>
+                <small>Gracias por la invitación</small>
+              </span>
+            </label>
+          </fieldset>
+
+
+          <!-- Fecha/hora que recibirá Apps Script -->
+          <input
+            type="hidden"
+            name="submittedAt"
+            id="submitted-at"
+          >
+
+
+          <button
+            class="primary-button primary-button--form"
+            type="submit"
+          >
+            CONFIRMAR
+          </button>
+
+
+          <p
+            id="form-status"
+            class="form-status"
+            role="status"
+            aria-live="polite"
+          ></p>
+        </form>
+
+        <div id="success-message" class="success-message" hidden>
+          <div class="success-heart" aria-hidden="true">♡</div>
+          <p class="eyebrow">GRACIAS</p>
+          <h3>Tu respuesta ha sido registrada</h3>
+          <p>Nos vemos el 6 de marzo de 2027.</p>
+          <button class="text-button" id="return-home" type="button">Volver a la invitación</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
