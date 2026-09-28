@@ -96,13 +96,20 @@
           title="Procesando confirmación"
         ></iframe>
 
-        <form
-          id="rsvp-form"
-          class="rsvp-form"
-          action="https://script.google.com/macros/s/AKfycbyTa0-AeSyVMlk8YWZ1yhdJ-dxhlQy0D5xMnTDezEhCtI7BwclTv_osjKZRnQ8T9pM/exec"
-          method="POST"
-          target="rsvp-frame"
-        >
+        <iframe
+          name="rsvp-frame"
+          id="rsvp-frame"
+          title="Procesando confirmación"
+          aria-hidden="true"
+          style="
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            border: 0;
+            opacity: 0;
+            pointer-events: none;
+          "
+        ></iframe>
           <div class="field">
             <label for="guest-name">Tu nombre</label>
 
