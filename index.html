@@ -88,28 +88,14 @@
           </p>
         </div>
 
-        <!-- Iframe invisible que recibe la respuesta de Google Apps Script -->
-        <iframe
-          name="rsvp-frame"
-          id="rsvp-frame"
-          hidden
-          title="Procesando confirmación"
-        ></iframe>
+        
 
-        <iframe
-          name="rsvp-frame"
-          id="rsvp-frame"
-          title="Procesando confirmación"
-          aria-hidden="true"
-          style="
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            border: 0;
-            opacity: 0;
-            pointer-events: none;
-          "
-        ></iframe>
+        <form
+          id="rsvp-form"
+          class="rsvp-form"
+          action="https://script.google.com/macros/s/AKfycbxgq3iRrd7kwyFi7lqB-dhkB_CeLjGEAuYn9cIkhdpkOFRulBZQJJahZAICcRzNHiE/exec"
+          method="POST"
+        >
           <div class="field">
             <label for="guest-name">Tu nombre</label>
 
@@ -123,7 +109,6 @@
               maxlength="120"
             >
           </div>
-
 
           <fieldset class="attendance">
             <legend>¿Nos acompañarás?</legend>
@@ -147,7 +132,6 @@
               </span>
             </label>
 
-
             <label class="radio-card">
               <input
                 type="radio"
@@ -168,14 +152,11 @@
             </label>
           </fieldset>
 
-
-          <!-- Fecha/hora que recibirá Apps Script -->
           <input
             type="hidden"
             name="submittedAt"
             id="submitted-at"
           >
-
 
           <button
             class="primary-button primary-button--form"
@@ -183,7 +164,6 @@
           >
             CONFIRMAR
           </button>
-
 
           <p
             id="form-status"
